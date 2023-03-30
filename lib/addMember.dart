@@ -3,9 +3,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:slutopgave/familly.dart';
-import 'package:slutopgave/famillyBrain.dart';
 
-FamillyBrain famillyBrain = FamillyBrain();
+// FamillyBrain famillyBrain = FamillyBrain();
 
 class AddMember extends StatefulWidget {
   @override
@@ -15,6 +14,8 @@ class AddMember extends StatefulWidget {
 class _AddMemberState extends State<AddMember> {
   String val = "";
   TextEditingController nameController = new TextEditingController();
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -82,16 +83,15 @@ class _AddMemberState extends State<AddMember> {
               controller: nameController,
               decoration: InputDecoration(
                 border: OutlineInputBorder(),
-                hintText: 'Ender a name',
+                hintText: 'Enter a name',
               ),
             ),
             TextButton(
               style: TextButton.styleFrom(backgroundColor: Colors.grey),
               onPressed: () {
-                setState(() {
-                  famillyBrain.addFamillyMember(val,nameController.text);
-                  Navigator.pop(context);
-                });
+                  Familly familly = Familly(val,nameController.text);
+                  
+                  Navigator.pop(context, familly);
               },
               child: Text(
                 'SEND',

@@ -10,14 +10,12 @@ class PickColor extends StatefulWidget {
 }
 
 class _PickColorState extends State<PickColor> {
-  _PickColorState({this.color});
-  Color? color;
+  Color color = Colors.green;
 
-  String? value1;
-  String? value2;
-  String? value3;
+  String? value1 = "00";
+  String? value2 = "00";
+  String? value3 = "00";
 
-  String? getColor;
 
   final items = ['00', '10', '20', '30', '40', 'A0', 'B0', 'C0', 'FF'];
 
@@ -40,7 +38,7 @@ class _PickColorState extends State<PickColor> {
         child: Column(
           children: [
             Text(
-              famillyBrain.getFamillyMemberType() + 's Color',
+              's Color',
               style: TextStyle(
                 fontSize: 20,
                 color: Colors.grey,
@@ -61,34 +59,26 @@ class _PickColorState extends State<PickColor> {
                 DropdownButton<String>(
                   value: value1,
                   items: items.map(buildMenuItem).toList(),
-                  onChanged: (value) => setState(() => this.value1 = value),
+                  onChanged: (value) => setState(() => value1 = value),
                 ),
                 DropdownButton<String>(
                   value: value2,
                   items: items.map(buildMenuItem).toList(),
-                  onChanged: (value) => setState(() => this.value2 = value),
+                  onChanged: (value) => setState(() => value2 = value),
                 ),
                 DropdownButton<String>(
                   value: value3,
                   items: items.map(buildMenuItem).toList(),
-                  onChanged: (value) => setState(() => this.value3 = value),
+                  onChanged: (value) => setState(() => value3 = value),
                 ),
               ],
             ),
             TextButton(
               style: TextButton.styleFrom(backgroundColor: Colors.grey),
               onPressed: () {
-                setState(() {
-                  //getColor = "0xFF" + value1.toString() + value2.toString() + value3.toString();
-                  //print(getColor);
-                  //getColor = getColor.toString();
-
-                  //Color color1 = HexColor(getColor);
-
-                  //color = color1;
-                  color = Color(0xFF9010C0);
-
-                });
+               int hexVal = int.parse('0xFF') + int.parse(value1!+value2!+value3!,radix: 16);
+               color = Color(hexVal);
+               Navigator.pop(context, color);
               },
               child: Text(
                 'GET ONES COLOR',

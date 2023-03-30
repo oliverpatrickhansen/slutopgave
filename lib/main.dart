@@ -4,6 +4,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:slutopgave/addMember.dart';
+import 'package:slutopgave/familly.dart';
 import 'package:slutopgave/pickColor.dart';
 
 void main() => runApp(SlutOpgave());
@@ -22,6 +23,10 @@ class FrontPage extends StatefulWidget {
 
 class _FrontPageState extends State<FrontPage> {
   List<String> nameList = [];
+
+  String familyMembersName = "Here comes the name";
+  Color color = Color(0xffffff);
+
 
   @override
   Widget build(BuildContext context) {
@@ -42,13 +47,16 @@ class _FrontPageState extends State<FrontPage> {
             ),
             TextButton(
               style: TextButton.styleFrom(backgroundColor: Colors.grey),
-              onPressed: () {
-                Navigator.push(
+              onPressed: () async {
+                  final Familly famillyMember = await Navigator.push(
                   context,
                   MaterialPageRoute(
                     builder: (context) => AddMember(),
                   ),
                 );
+                setState(() {
+                  familyMembersName = famillyMember.famillyMemberType + "'s name: " + famillyMember.famillyMemberName;
+                });
               },
               child: Text(
                 'GET ONES NAME',
@@ -57,37 +65,29 @@ class _FrontPageState extends State<FrontPage> {
             ),
             Row(
               children: [
-                Visibility(
-                  visible: !famillyBrain.buttonShouldBeVisible(),
-                  child: Text(
-                    famillyBrain.getFamillyMemberType(),
+               Text(
+                    familyMembersName,
                     style: TextStyle(
                       fontSize: 20,
                       color: Colors.grey,
+                      backgroundColor: color
                     ),
                   ),
-                ),
-                Visibility(
-                  visible: famillyBrain.buttonShouldBeVisible(),
-                  child: Text(
-                    famillyBrain.getFamillyMemberType() + ' : ' + famillyBrain.getFamillyMemberName(),
-                    style: TextStyle(
-                      fontSize: 20,
-                      color: Colors.grey,
-                    ),
-                  ),
-                ),
+                
               ],
             ),
             TextButton(
               style: TextButton.styleFrom(backgroundColor: Colors.grey),
-              onPressed: () {
-                Navigator.push(
+              onPressed: () async{
+                final Color newcolor = await Navigator.push(
                   context,
                   MaterialPageRoute(
                     builder: (context) => PickColor(),
                   ),
                 );
+                setState(() {
+                  color = newcolor;
+                });
               },
               child: Text(
                 'GET ONES COLOR',
