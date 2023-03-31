@@ -22,7 +22,6 @@ class FrontPage extends StatefulWidget {
 }
 
 class _FrontPageState extends State<FrontPage> {
-  List<String> nameList = [];
 
   String familyMembersName = "Here comes the name";
   Color color = Color(0xffffff);

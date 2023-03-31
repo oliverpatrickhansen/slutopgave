@@ -76,7 +76,7 @@ class _PickColorState extends State<PickColor> {
             TextButton(
               style: TextButton.styleFrom(backgroundColor: Colors.grey),
               onPressed: () {
-               int hexVal = int.parse('0xFF') + int.parse(value1!+value2!+value3!,radix: 16);
+               int hexVal = int.parse('0xFF'+value1!+value2!+value3!);
                color = Color(hexVal);
                Navigator.pop(context, color);
               },
@@ -90,16 +90,4 @@ class _PickColorState extends State<PickColor> {
       ),
     );
   }
-}
-
-class HexColor extends Color {
-  static int _getColorFromHex(String hexColor) {
-    hexColor = hexColor.toUpperCase().replaceAll("#", "");
-    if (hexColor.length == 6) {
-      hexColor = "FF" + hexColor;
-    }
-    return int.parse(hexColor, radix: 16);
-  }
-
-  HexColor(final String hexColor) : super(_getColorFromHex(hexColor));
 }
